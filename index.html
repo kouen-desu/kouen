@@ -12,17 +12,34 @@ margin:0;
 font-family:Arial, sans-serif;
 color:white;
 text-align:center;
-background:#2f4f2f;
-background-image:radial-gradient(#3a5f3a 1px, transparent 1px);
-background-size:20px 20px;
 height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
 flex-direction:column;
+background:url("grass.jpg") center/cover no-repeat;
+position:relative;
 }
 
-/* PCカーソル（☮） */
+/* 少し暗くして文字見やすく */
+body::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.3);
+z-index:0;
+}
+
+/* コンテンツ前面に */
+#welcome, #age, #enter{
+position:relative;
+z-index:1;
+}
+
+/* PCカーソル ☮ */
 @media (pointer:fine){
 body{
 cursor:url('peace.png'), auto;
@@ -50,13 +67,13 @@ background:#222;
 color:white;
 }
 
-/* 👇ぷにっと感（重要） */
+/* 👇ぷにっと演出 */
 button:active{
 transform:scale(0.92);
 opacity:0.7;
 }
 
-/* スマホ用 */
+/* スマホ調整 */
 @media (max-width:768px){
 button{
 font-size:16px;
@@ -64,7 +81,12 @@ padding:14px 28px;
 }
 }
 
-#welcome{display:flex;flex-direction:column;align-items:center;}
+#welcome{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
 #age{display:none;}
 #enter{display:none;font-size:26px;}
 
@@ -123,7 +145,7 @@ document.getElementById("enter").style.display="block";
 document.getElementById("bird").play();
 
 setTimeout(function(){
-window.location.href="SHOPURL";
+window.location.href="https://kouen.square.site";
 },1500);
 }
 

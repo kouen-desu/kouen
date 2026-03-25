@@ -2,28 +2,34 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>入園処理中</title>
+<title>入園中</title>
 
 <style>
 body {
+  margin: 0;
+  height: 100vh;
   text-align: center;
   font-family: sans-serif;
-  padding-top: 120px;
   color: #fff;
 
-  /* 🌱 濃い芝生背景 */
-  background: url("grass.jpg");
+  /* 🌱 完全芝生（白なし） */
+  background: url("grass.jpg") no-repeat center center;
   background-size: cover;
-  background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 28px;
   text-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
 
 p {
-  color: #eee;
+  font-size: 12px;
+  margin-top: 20px;
   text-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
 </style>
@@ -32,19 +38,26 @@ p {
 <body>
 
 <h1>入園中・・・🌳</h1>
+<p>※音量にお気をつけください</p>
 
-<p style="font-size:12px; margin-top:20px;">
-  ※音量にお気をつけください
-</p>
-  
-<audio autoplay>
-  <source src="https://www.soundjay.com/nature/bird-1.mp3">
+<audio id="bird" preload="auto">
+  <source src="bird.mp3">
 </audio>
 
 <script>
-setTimeout(() => {
-  window.location.href = "https://kouen.square.site";
-}, 3000);
+window.onload = function() {
+  const bird = document.getElementById("bird");
+
+  // 少し遅らせて再生（成功率UP）
+  setTimeout(() => {
+    bird.play().catch(() => {});
+  }, 100);
+
+  // 遷移
+  setTimeout(() => {
+    window.location.href = "https://kouen.square.site";
+  }, 3000);
+}
 </script>
 
 </body>

@@ -100,7 +100,7 @@ p {
   <h2>日本を代表する非公式自然ポータルへようこそ</h2>
 
   <p>
-    創業3年以上の実績で、安心安全にご利用いただける無目的サイトです。
+    創業1000日以上の実績で、安心安全にご利用いただける無目的サイトです。
   </p>
 
   <p>
@@ -120,6 +120,13 @@ p {
 
 <script>
 function enterSite() {
+  const bird = document.getElementById("bird");
+
+  bird.currentTime = 0;
+  bird.play();
+
+  // 少しだけ余韻作る
+  setTimeout(() => {
   window.location.href = "loading.html";
 }
 </script>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOUEN</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+color:white;
+text-align:center;
+background:#2f4f2f;
+background-image:radial-gradient(#3a5f3a 1px, transparent 1px);
+background-size:20px 20px;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+
+/* PCカーソル（☮） */
+@media (pointer:fine){
+body{
+cursor:url('peace.png'), auto;
+}
+}
+
+button{
+padding:16px 36px;
+margin:12px;
+font-size:18px;
+border:none;
+cursor:pointer;
+transition:all 0.15s ease;
+}
+
+/* OPENボタン */
+.gate{
+background:white;
+color:black;
+}
+
+/* NOボタン */
+.no{
+background:#222;
+color:white;
+}
+
+/* 👇ぷにっと感（重要） */
+button:active{
+transform:scale(0.92);
+opacity:0.7;
+}
+
+/* スマホ用 */
+@media (max-width:768px){
+button{
+font-size:16px;
+padding:14px 28px;
+}
+}
+
+#welcome{display:flex;flex-direction:column;align-items:center;}
+#age{display:none;}
+#enter{display:none;font-size:26px;}
+
+img{
+max-width:200px;
+margin-bottom:20px;
+}
+
+</style>
+</head>
+
+<body onclick="start(event)">
+
+<div id="welcome">
+
+<img src="logo.png">
+
+<h2>WELCOME TO THE PARK</h2>
+<p>tap to continue</p>
+
+</div>
+
+<div id="age">
+
+<img src="logo.png">
+
+<h3>ARE YOU 18 OR OLDER?</h3>
+
+<button class="gate" onclick="enterPark(event)">OPEN THE GATE</button>
+<br>
+<button class="no" onclick="notYet(event)">NOT YET</button>
+
+</div>
+
+<div id="enter">
+entering the park...
+</div>
+
+<audio id="bird" src="bird.mp3"></audio>
+
+<script>
+
+function start(e){
+if(e.target.tagName !== "BUTTON"){
+document.getElementById("welcome").style.display="none";
+document.getElementById("age").style.display="block";
+}
+}
+
+function enterPark(e){
+e.stopPropagation();
+
+document.getElementById("age").style.display="none";
+document.getElementById("enter").style.display="block";
+
+document.getElementById("bird").play();
+
+setTimeout(function(){
+window.location.href="SHOPURL";
+},1500);
+}
+
+function notYet(e){
+e.stopPropagation();
+window.location.href="no.html";
+}
+
+</script>
+
+</body>
+</html>

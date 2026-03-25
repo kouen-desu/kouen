@@ -1,159 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KOUEN</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
 <style>
+body {
+  margin: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+  text-align: center;
+  color: #111;
 
-body{
-margin:0;
-font-family:Arial, sans-serif;
-color:white;
-text-align:center;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-background:url("grass.jpg") center/cover no-repeat;
-position:relative;
+  background:
+    linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
+    url("grass.jpg");
+
+  background-size: cover;
+  background-position: center;
 }
 
-/* 少し暗くして文字見やすく */
-body::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.3);
-z-index:0;
+.header {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
 }
 
-/* コンテンツ前面に */
-#welcome, #age, #enter{
-position:relative;
-z-index:1;
+.logo {
+  color: #e60023;
+  font-weight: 900;
+  font-size: 48px;
 }
 
-/* PCカーソル ☮ */
-@media (pointer:fine){
-body{
-cursor:url('peace.png'), auto;
-}
-}
-
-button{
-padding:16px 36px;
-margin:12px;
-font-size:18px;
-border:none;
-cursor:pointer;
-transition:all 0.15s ease;
+.container {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* OPENボタン */
-.gate{
-background:white;
-color:black;
+h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
 }
 
-/* NOボタン */
-.no{
-background:#222;
-color:white;
+p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
 }
 
-/* 👇ぷにっと演出 */
-button:active{
-transform:scale(0.92);
-opacity:0.7;
+.btn {
+  display: block;
+  margin: 15px auto;
+  padding: 15px;
+  width: 80%;
+  max-width: 300px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
 }
 
-/* スマホ調整 */
-@media (max-width:768px){
-button{
-font-size:16px;
-padding:14px 28px;
-}
+.enter {
+  background: #d6336c;
+  color: white;
 }
 
-#welcome{
-display:flex;
-flex-direction:column;
-align-items:center;
+.destroy {
+  background: #333;
+  color: white;
 }
 
-#age{display:none;}
-#enter{display:none;font-size:26px;}
-
-img{
-max-width:200px;
-margin-bottom:20px;
+.btn:hover {
+  opacity: 0.85;
 }
 
+#loading {
+  display: none;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.small {
+  font-size: 12px;
+  color: #999;
+  margin-top: 20px;
+}
 </style>
 </head>
 
-<body onclick="start(event)">
+<body>
 
-<div id="welcome">
+<div class="header">
+  <div class="logo">KOUEN</div>
+</div>
 
-<img src="logo.png">
+<div class="container">
 
-<h2>WELCOME TO THE PARK</h2>
-<p>tap to continue</p>
+  <h2>日本を代表する非公式自然ポータルへようこそ</h2>
+
+  <p>
+    創業3年以上の実績で、安心安全にご利用いただける無目的サイトです。
+  </p>
+
+  <p>
+    ここから先は、無意味プロダクトを扱うサイトになります。<br>
+    18歳未満の方のご入場は柔めにはね返します。
+  </p>
+
+  <h2>あなたはどんなおつもりですか？</h2>
+
+  <button class="btn enter" onclick="enterSite()">入園したい</button>
+
+  <a class="btn destroy" href="https://www.marugun.co.jp/産業用爆薬/">
+    ぶち壊したい
+  </a>
+
+  <div id="loading">ロード中・・・🐦（ﾁｭﾝﾁｭﾝ）</div>
+
+  <div class="small">
+    ※この公園には出口の概念が存在しない場合があります
+  </div>
 
 </div>
 
-<div id="age">
-
-<img src="logo.png">
-
-<h3>ARE YOU 18 OR OLDER?</h3>
-
-<button class="gate" onclick="enterPark(event)">OPEN THE GATE</button>
-<br>
-<button class="no" onclick="notYet(event)">NOT YET</button>
-
-</div>
-
-<div id="enter">
-entering the park...
-</div>
-
-<audio id="bird" src="bird.mp3"></audio>
+<audio id="bird" src="https://www.soundjay.com/nature/bird-1.mp3"></audio>
 
 <script>
+function enterSite() {
+  document.getElementById("loading").style.display = "block";
 
-function start(e){
-if(e.target.tagName !== "BUTTON"){
-document.getElementById("welcome").style.display="none";
-document.getElementById("age").style.display="block";
+  const bird = document.getElementById("bird");
+  bird.play();
+
+  setTimeout(() => {
+    window.location.href = "loading.html";
+  }, 2500);
 }
-}
-
-function enterPark(e){
-e.stopPropagation();
-
-document.getElementById("age").style.display="none";
-document.getElementById("enter").style.display="block";
-
-document.getElementById("bird").play();
-
-setTimeout(function(){
-window.location.href="https://kouen.square.site";
-},1500);
-}
-
-function notYet(e){
-e.stopPropagation();
-window.location.href="no.html";
-}
-
 </script>
 
 </body>

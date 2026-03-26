@@ -89,6 +89,8 @@ p {
 
 <body>
 
+<audio id="bird" src="bird.mp3" preload="auto"></audio>
+  
 <div class="header">
   <div class="logo">
     <img src="kouen-logo.png">
@@ -127,9 +129,9 @@ function enterSite() {
 
   // 少しだけ余韻作る
   setTimeout(() => {
-  window.location.href = "loading.html";
+    window.location.href = "loading.html";
+  }, 800);
 }
 </script>
-
 </body>
 </html>
